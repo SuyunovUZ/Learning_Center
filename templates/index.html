@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{{caruseles.first.image.url}}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+
+  </button>
+</div>
+
+    <h1 style="margin-top: 60px; margin-bottom: 60px">Courses</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 60px">
+        {% for obj in courses %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ obj.course_image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'course-detail' obj.id %}">{{ obj.name }}</a></h5>
+                        <p class="card-text">{{ obj.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Narxi: {{ obj.price }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <h1 style="margin-top: 60px; margin-bottom: 60px">Teachers</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for teacher in teachers %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ teacher.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ teacher.name }}</h5>
+                        <p class="card-text">{{ teacher.experience }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Email: {{ teacher.email }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+          <div style="text-align: center; margin-top: 60px" class="row block-9 no-gutters" id="contact">
+                <h1>Cntact</h1>
+                <div class="col-lg-6 order-md-last d-flex">
+                    <form method="post" class="bg-light p-4 p-md-5 contact-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {#                        <input type="text" class="form-control" placeholder="Your Name">#}
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            {#                        <input type="text" class="form-control" placeholder="Your Name">#}
+                            {{ form.phone }}
+                        </div>
+                        <div class="form-group">
+                            {#                        <input type="text" class="form-control" placeholder="Your Email">#}
+                            {{ form.email }}
+                        </div>
+{#                        <div class="form-group">#}
+                            {#                        <input type="text" class="form-control" placeholder="Subject">#}
+{#                            {{ form.subject }}#}
+{#                        </div>#}
+                        <div class="form-group">
+                            {#                        <textarea name="" id="" cols="30" rows="7" class="form-control"#}
+                            {#                                  placeholder="Message"></textarea>#}
+                            {{ form.message }}
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                        </div>
+                    </form>
+                </div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{{caruseles.first.image.url}}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+
+  </button>
+</div>
+
+    <h1 style="margin-bottom: 60px; margin-top: 60px">Kurslar</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 60px">
+        {% for obj in courses %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ obj.course_image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'course-detail' obj.id %}">{{ obj.name }}</a></h5>
+                        <p class="card-text">{{ obj.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <h3 class="text-muted">Narxi: {{ obj.price }}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text">Teacher: {{ obj.teacher }}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

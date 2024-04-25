@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="{{caruseles.first.image.url}}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+
+  </button>
+</div>
+
+    <div class="col">
+        <div class="card h-100">
+            <a href="{% url 'teacher_detail' teacher.id %}"><img style="width: 300px; height: 300px; margin-left: 60px"
+                                                                 src="{{ teacher.image.url }}" class="card-img-top" alt="..."></a>
+            <div class="card-body">
+                <h5 class="card-title">{{ teacher.name }} {{ teacher.surname }}</h5>
+                <p class="card-text">{{ teacher.experience }}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Email: {{ teacher.email }}</small>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
